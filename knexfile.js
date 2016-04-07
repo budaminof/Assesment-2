@@ -6,5 +6,8 @@ module.exports = {
        client: 'pg',
        connection: 'postgres://localhost/galvanize-read'
        },
+       seeds: {
+            directory: './seeds/'
+        }
 
 };

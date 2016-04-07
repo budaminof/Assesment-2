@@ -18,9 +18,8 @@ exports.up = function(knex, Promise) {
     })
 
     .createTable('authors_books', function (table){
-        table.increments();
-        table.integer('book_id').notNullable().references('id').inTable('books');
-        table.integer('author_id').notNullable().references('id').inTable('authors');
+        table.integer('book_id').references('books.id').onUpdate('CASCADE').onDelete('CASCADE');
+        table.integer('author_id').references('authors.id').onUpdate('CASCADE').onDelete('CASCADE');
     })
 
 };
