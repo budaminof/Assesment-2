@@ -4,5 +4,9 @@ body {
 }
 
 a {
-  color: #00B7FF;
+    text-align: center;
+}
+.mainImg {
+    height: 616px;
+    width: 476px;
 }
