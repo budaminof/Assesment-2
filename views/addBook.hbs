@@ -14,35 +14,31 @@
         <div class="editForm">
             <legend>Add a Book</legend>
             <form action="/authors/" method="post">
+                <div class="form-group">
                 <label>Add a Book</label>
-                <br>
-                <input type="text" name="title" value="">
-                <br>
-                <label>Last Name</label>
-                <br>
-                <input type="text" name="genre" value="">
-                <br>
-                <label>Portrait URL</label>
-                <br>
-                <input type="text" name="cover_url" value="">
-                <br>
-                <label>Biography</label>
-                <br>
-                <textarea name="description" value="" rows='6' cols='30'></textarea>
-                <br>
-                <label>Authors</label>
-                <br class="appendBook">
-                <div class="books">
-                    <select>
-                        <option>Select an Author</option>
-                        {{#authors}}
-                        <option>{{author}}</option>
-                        {{/authors}}
-                    </select>
-
+                <input type="text" class="form-control" name="title" value="">
                 </div>
-                <br>
-                <input type="submit" value="Add">
+                <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="genre" value="">
+                </div>
+                <div class="form-group">
+                <label>Portrait URL</label>
+                <input type="text" class="form-control" name="cover_url" value="">
+                </div>
+                <div class="form-group">
+                <label>Biography</label>
+                <textarea name="description" class="form-control" value="" rows='6' cols='30'></textarea>
+                </div>
+                <label>Authors</label>
+                <div class="checkbox">
+                {{#authors}}
+                <label><input type="checkbox">{{author}}</input></label><br>
+                {{/authors}}
+                </div>
+                <div class="form-group">
+                <input type="submit" class="form-control" value="Add">
+                </div>
             </form>
         </div>
     </div>

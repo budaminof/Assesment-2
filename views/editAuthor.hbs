@@ -14,41 +14,37 @@
         <div class="editForm">
             <legend>Edit</legend>
             <form action="/authors/{{result.id}}/edit" method="post">
+                <div class="form-group">
                 <label>First Name</label>
-                <br>
-                <input type="text" name="first_name" value="{{result.first_name}}">
-                <br>
-                <label>Last Name</label>
-                <br>
-                <input type="text" name="last_name" value="{{result.last_name}}">
-                <br>
-                <label>Portrait URL</label>
-                <br>
-                <input type="text" name="portrait_url" value="{{result.portrait_url}}">
-                <br>
-                <label>Biography</label>
-                <br>
-                <textarea name="biography" value="" rows='6' cols='30'>{{result.biography}}</textarea>
-                <br>
-                <label>Books</label>
-                <br>
-                <div class="books appendBook">
-                    {{#books}}
-                        <p>{{title}}<a href="/books/{{id}}/delete"> remove</a></p>
-                    {{/books}}
+                <input type="text" name="first_name" class="form-control" value="{{result.first_name}}">
                 </div>
-                <br>
-                <form class="books">
-                    <select class="addBook">
-                        <option>Select a book</option>
-                        {{#allBooks}}
-                        <option value="{{this}}">{{this}}</option>
-                        {{/allBooks}}
-                        <input type="submit" name="selectSubmit" value="Add book">
-                    </select>
-                </form>
-                <br>
-                <input type="submit" value="Edit">
+                <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="last_name" class="form-control" value="{{result.last_name}}">
+                </div>
+                <div class="form-group">
+                <label>Portrait URL</label>
+                <input type="text" name="portrait_url" class="form-control" value="{{result.portrait_url}}">
+                </div>
+                <div class="form-group">
+                <label>Biography</label>
+                <textarea name="biography" class="form-control" value="" rows='6' cols='30'>{{result.biography}}</textarea>
+                </div>
+                <label>Books</label>
+                <div class="form-group">
+                {{#books}}
+                <p class="form-control">{{title}}<a href="/books/{{id}}/delete"> remove</a></p>
+                {{/books}}
+                </div>
+                <label>Add Books:</label>
+                <div class="form-group">
+                {{#allBooks}}
+                <label><input type="checkbox">{{this}}</input></label><br>
+                {{/allBooks}}
+                </div>
+                <div class="form-group">
+                <input type="submit" class="form-control" value="Edit">
+                </div>
             </form>
         </div>
     </div>

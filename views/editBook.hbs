@@ -12,39 +12,39 @@
 
     <div class="col-md-10 col-md-offset-1">
         <div class="editForm">
-            <legend>Edit</legend>
+            <legend>Edit Book</legend>
             <form action="/authors/{{result.id}}/edit" method="post">
+                <div class="form-group">
                 <label>Title</label>
-                <br>
-                <input type="text" name="title" value="{{result.title}}">
-                <br>
-                <label>Genre</label>
-                <br>
-                <input type="text" name="genre" value="{{result.genre}}">
-                <br>
-                <label>Cover URL</label>
-                <br>
-                <input type="text" name="cover_url" value="{{result.cover_url}}">
-                <br>
-                <label>description</label>
-                <br>
-                <textarea name="description" value="" rows='6' cols='30'>{{result.description}}</textarea>
-                <br>
-                <label>Author/s</label>
-                <br>
-                <div class="books appendBook">
-                    {{#authors}}
-                        <p>{{author}}<a href="/authors/{{id}}/delete"> remove</a></p>
-                    {{/authors}}
+                <input type="text" name="title" class="form-control" value="{{result.title}}">
                 </div>
-                <select>
-                    <option>Authors</option>
-                    {{#allAuthors}}
-                    <option>{{author}}</option>
-                    {{/allAuthors}}
-                </select>
-                <br>
-                <input type="submit" value="Edit">
+                <div class="form-group">
+                <label>Genre</label>
+                <input type="text" name="genre" class="form-control" value="{{result.genre}}">
+                </div>
+                <div class="form-group">
+                <label>Cover URL</label>
+                <input type="text" name="cover_url" class="form-control" value="{{result.cover_url}}">
+                </div>
+                <div class="form-group">
+                <label>description</label>
+                <textarea name="description" class="form-control" value="" rows='6' cols='30'>{{result.description}}</textarea>
+                </div>
+                <div class="form-group">
+                <label>Authors</label>
+                {{#authors}}
+                <p class="form-control">{{author}}<a href="/authors/{{id}}/delete"> remove</a></p>
+                {{/authors}}
+                </div>
+                <label>Add Authors:</label>
+                <div class="checkbox">
+                {{#allAuthors}}
+                <label><input type="checkbox">{{author}}</input></label><br>
+                {{/allAuthors}}
+                </div>
+                <div class="form-group">
+                <input type="submit"  class="form-control"value="Edit">
+                </div>
             </form>
         </div>
     </div>
