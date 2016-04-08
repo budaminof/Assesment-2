@@ -114,10 +114,6 @@ exports.seed = function(knex, Promise) {
                 }),
                 knex('authors_books').insert({
                     book_id: data.books.pythonInANutshell,
-                    author_id: data.authors.alexMartelli
-                }),
-                knex('authors_books').insert({
-                    book_id: data.books.pythonInANutshell,
                     author_id: data.authors.annaMartelli
                 }),
                 knex('authors_books').insert({

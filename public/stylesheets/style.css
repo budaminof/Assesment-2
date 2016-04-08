@@ -12,3 +12,11 @@ a {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+img {
+    padding-top: 10px;
+}
+
+.mainImg, .mainImg2{
+    padding: 0;
+}
