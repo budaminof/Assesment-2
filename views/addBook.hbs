@@ -14,32 +14,32 @@
         <div class="editForm">
             <legend>Edit</legend>
             <form action="/authors/" method="post">
-                <label>First Name</label>
+                <label>Add a Book</label>
                 <br>
-                <input type="text" name="first_name" value="">
+                <input type="text" name="title" value="">
                 <br>
                 <label>Last Name</label>
                 <br>
-                <input type="text" name="last_name" value="">
+                <input type="text" name="genre" value="">
                 <br>
                 <label>Portrait URL</label>
                 <br>
-                <input type="text" name="portrait_url" value="">
+                <input type="text" name="cover_url" value="">
                 <br>
                 <label>Biography</label>
                 <br>
-                <textarea name="biography" value="" rows='6' cols='30'></textarea>
+                <textarea name="description" value="" rows='6' cols='30'></textarea>
                 <br>
-                <label>Books</label>
-                <br>
+                <label>Authors</label>
+                <br class="appendBook">
                 <div class="books">
                     <select>
-                        <option>Select a book</option>
-                        {{#allBooks}}
+                        <option>Select an Author</option>
+                        {{#authors}}
                         <option>{{this}}</option>
-                        {{/allBooks}}
+                        {{/authors}}
                     </select>
-                    
+
                 </div>
                 <br>
                 <input type="submit" value="Add">

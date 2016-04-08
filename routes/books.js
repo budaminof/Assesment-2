@@ -39,6 +39,18 @@ var youBooks = [];
 
 });
 
+router.get('/add', function(req, res, next){
+    knex('authors')
+    .pluck('last_name')
+    .then(function (authors){
+        res.render('addBook',{authors: authors})
+    })
+})
+
+router.get('/:id/edit', function (req, res, next){
+    res.render('editBook')
+})
+
 router.get('/:id', function(req, res, next){
 
     return knex('books')

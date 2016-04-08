@@ -1,0 +1,45 @@
+<div class="col-md-12">
+
+<div class="row">
+    <div class="col-md-1">
+        <img src="http://whytoread.com/wp-content/uploads/2015/03/best-books-book-youll-ever-read.jpg"
+        alt="authors" style="height:60px">
+        <a href="/books"><h3 class="sidewise">Books</h3></a>
+        <img src="https://s-media-cache-ak0.pinimg.com/736x/d6/ac/26/d6ac2660f86d6936ed3a055481b179f6.jpg"
+          alt="authors" style="height:60px">
+         <a href="/authors"><h3 class="sidewise">Authors</h3></a>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1">
+        <div class="editForm">
+            <legend>Edit</legend>
+            <form action="/authors/{{result.id}}/edit" method="post">
+                <label>Title</label>
+                <br>
+                <input type="text" name="title" value="{{result.title}}">
+                <br>
+                <label>Genre</label>
+                <br>
+                <input type="text" name="genre" value="{{result.genre}}">
+                <br>
+                <label>Cover URL</label>
+                <br>
+                <input type="text" name="cover_url" value="{{result.cover_url}}">
+                <br>
+                <label>description</label>
+                <br>
+                <textarea name="description" value="" rows='6' cols='30'>{{result.description}}</textarea>
+                <br>
+                <label>Author/s</label>
+                <br>
+                <div class="books appendBook">
+                    {{#authors}}
+                        <p>{{title}}<a href="/authors/{{id}}/delete"> remove</a></p>
+                    {{/authors}}
+                </div>
+                <br>
+                <input type="submit" value="Edit">
+            </form>
+        </div>
+    </div>
+</div>

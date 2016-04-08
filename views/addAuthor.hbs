@@ -12,43 +12,36 @@
 
     <div class="col-md-10 col-md-offset-1">
         <div class="editForm">
-            <legend>Edit</legend>
-            <form action="/authors/{{result.id}}/edit" method="post">
+            <legend>Add Author</legend>
+            <form action="/authors/" method="post">
                 <label>First Name</label>
                 <br>
-                <input type="text" name="first_name" value="{{result.first_name}}">
+                <input type="text" name="first_name" value="">
                 <br>
                 <label>Last Name</label>
                 <br>
-                <input type="text" name="last_name" value="{{result.last_name}}">
+                <input type="text" name="last_name" value="">
                 <br>
                 <label>Portrait URL</label>
                 <br>
-                <input type="text" name="portrait_url" value="{{result.portrait_url}}">
+                <input type="text" name="portrait_url" value="">
                 <br>
                 <label>Biography</label>
                 <br>
-                <textarea name="biography" value="" rows='6' cols='30'>{{result.biography}}</textarea>
+                <textarea name="biography" value="" rows='6' cols='30'></textarea>
                 <br>
                 <label>Books</label>
-                <br>
-                <div class="books appendBook">
-                    {{#books}}
-                        <p>{{title}}<a href="/books/{{id}}/delete"> remove</a></p>
-                    {{/books}}
-                </div>
-                <br>
-                <form class="books">
-                    <select class="addBook">
+                <br class="appendBook">
+                <div class="books">
+                    <select>
                         <option>Select a book</option>
                         {{#allBooks}}
-                        <option value="{{this}}">{{this}}</option>
+                        <option>{{this}}</option>
                         {{/allBooks}}
-                        <input type="submit" name="selectSubmit" value="Add book">
                     </select>
-                </form>
+                </div>
                 <br>
-                <input type="submit" value="Edit">
+                <input type="submit" value="Add">
             </form>
         </div>
     </div>
