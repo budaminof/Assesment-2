@@ -25,19 +25,16 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function (req, res, next){
     return knex('authors')
-        .where({id: req.params.id})
-        .then(function (author){
-            return knex('authors_books')
-            .where({author_id: req.params.id})
-            .pluck('book_id')
-            .then(function(booksId){
-                return knex('books')
-                .whereIn('id', booksId)
-                .pluck('title')
-                .then(function(titles){
-                    res.render('author',{result: author[0], books: titles});
-                })
-            })
+        .where('authors.id', req.params.id)
+        .innerJoin('authors_books', 'authors.id', 'authors_books.author_id')
+        .innerJoin('books', 'authors_books.book_id', 'books.id')
+        .select('books.title', 'authors.first_name', 'authors.last_name', 'authors.biography', 'authors.portrait_url')
+        .then(function(data){
+            var booksArray=[];
+            for (var i = 0; i < data.length; i++) {
+                booksArray.push(data[i].title)
+            }
+            res.render('author',{books: booksArray, result: data[0]});
         })
 })
 
