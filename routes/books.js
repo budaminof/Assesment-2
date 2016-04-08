@@ -41,9 +41,13 @@ var youBooks = [];
 
 router.get('/add', function(req, res, next){
     knex('authors')
-    .pluck('last_name')
+    .select('last_name', 'first_name', 'id')
     .then(function (authors){
-        res.render('addBook',{authors: authors})
+        var name= [];
+        for (var i = 0; i < authors.length; i++) {
+            name.push({author: authors[i].first_name+' '+authors[i].last_name, id: authors[i].id})
+        }
+        res.render('addBook',{authors: name})
     })
 })
 

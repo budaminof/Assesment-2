@@ -40,9 +40,13 @@ router.get('/', function(req, res, next) {
 
 router.get('/add', function(req, res, next){
     knex('books')
-    .pluck('title')
+    .select('title', 'id')
     .then(function (allBooks){
-        res.render('addAuthor',{allBooks: allBooks})
+        var books= [];
+        for (var i = 0; i < allBooks.length; i++) {
+            books.push({title: allBooks[i].title, id: allBooks[i].id});
+        }
+        res.render('addAuthor',{allBooks: books})
     })
 })
 
