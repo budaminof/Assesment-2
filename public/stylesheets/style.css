@@ -6,7 +6,9 @@ body {
 a {
     text-align: center;
 }
-.mainImg {
-    height: 616px;
-    width: 476px;
+
+.sidewise {
+    -webkit-transform: rotate(270deg);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

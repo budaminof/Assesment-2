@@ -3,19 +3,18 @@ var router = express.Router();
 var knex = require('knex')(require('../knexfile')['development']);
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    var result = {}
 
-    knex('authors_books')
-    .then(function (data){
-        result.books = data;
-    })
-    knex('books')
-    .whereIn('id', result.books.book_id)
-    .then(function (books){
-        console.log('books: ',books);
-    })
+var resultData= {};
+var array= [];
 
-    res.render('books');
+        knex('books')
+        .then(function (booksInfo){
+            resultData.books = booksInfo;
+            res.render('books', {result: booksInfo})
+        })
+
+
+
 });
 
 module.exports = router;

@@ -1,12 +1,36 @@
-<div class="row">
-  <div class="col-md-4">
-    <div class="thumbnail">
-      <img src="..." alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
+<div class="col-md-12">
+    <div class="row">
+
+    <div class="col-md-1">
+        <img src="http://whytoread.com/wp-content/uploads/2015/03/best-books-book-youll-ever-read.jpg"
+        alt="authors" style="height:60px">
+        <a href="/books"><h3 class="sidewise">Books</h3></a>
+        <img src="https://s-media-cache-ak0.pinimg.com/736x/d6/ac/26/d6ac2660f86d6936ed3a055481b179f6.jpg"
+          alt="authors" style="height:60px">
+         <a href="/authors"><h3 class="sidewise">Authors</h3></a>
     </div>
-  </div>
+
+    <div class="col-md-10 col-md-offset-1">
+        {{#result}}
+        <div class="thumbnail col-md-11">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="col-md-3">
+                        <img src="{{cover_url}}" alt="coverPicture" style="height:270px">
+                    </div>
+                    <div class="col-md-8 col-md-offset-1">
+                        <div class="caption">
+                            <h3>{{title}}</h3>
+                            <h4>By</h4>
+                            <h4>Genre: {{genre}}</h4>
+                            <p>{{description}}</p>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a><a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/result}}
+    </div>
+    </div>
 </div>
