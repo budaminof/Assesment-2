@@ -34,9 +34,15 @@
                 <br>
                 <div class="books appendBook">
                     {{#authors}}
-                        <p>{{title}}<a href="/authors/{{id}}/delete"> remove</a></p>
+                        <p>{{author}}<a href="/authors/{{id}}/delete"> remove</a></p>
                     {{/authors}}
                 </div>
+                <select>
+                    <option>Authors</option>
+                    {{#allAuthors}}
+                    <option>{{author}}</option>
+                    {{/allAuthors}}
+                </select>
                 <br>
                 <input type="submit" value="Edit">
             </form>

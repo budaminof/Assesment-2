@@ -52,7 +52,31 @@ router.get('/add', function(req, res, next){
 })
 
 router.get('/:id/edit', function (req, res, next){
-    res.render('editBook')
+    return knex('books')
+        .where('books.id', req.params.id)
+        .innerJoin('authors_books', 'books.id', 'authors_books.book_id')
+        .innerJoin('authors', 'authors_books.author_id', 'authors.id')
+        .select('books.title', 'authors.first_name', 'authors.last_name', 'books.description', 'books.cover_url', 'authors.id','books.id', 'books.genre')
+        .then(function(data){
+            var authorsArray=[];
+            for (var i = 0; i < data.length; i++) {
+                authorsArray.push({author: data[i].first_name+' '+data[i].last_name, id: data[i].id})
+            }
+
+            knex('authors')
+            .select('authors.first_name', 'authors.last_name', 'authors.id')
+            .then(function (authors){
+                    var authorsArr = []
+                    for (var i = 0; i < authors.length; i++) {
+                        authorsArr.push({author: authors[i].first_name+' '+authors[i].last_name, id: authors[i].id})
+                    }
+                res.render('editBook',{
+                    result: data[0],
+                    authors: authorsArray,
+                    allAuthors: authorsArr
+                });
+            })
+        })
 })
 
 router.get('/:id', function(req, res, next){
@@ -61,7 +85,7 @@ router.get('/:id', function(req, res, next){
     .where('books.id', req.params.id)
     .innerJoin('authors_books', 'books.id', 'authors_books.book_id')
     .innerJoin('authors', 'authors_books.author_id', 'authors.id')
-    .select('books.title','authors.first_name', 'authors.last_name', 'books.description', 'books.genre', 'books.cover_url')
+    .select('books.title','authors.first_name', 'authors.last_name', 'books.description', 'books.genre', 'books.cover_url', 'books.id')
     .then(function(data){
         var authorsArray= [];
         for (var i = 0; i < data.length; i++) {

@@ -50,6 +50,29 @@ router.get('/add', function(req, res, next){
     })
 })
 
+router.get('/:id/edit', function (req, res, next){
+    return knex('authors')
+    .where('authors.id', req.params.id)
+    .innerJoin('authors_books', 'authors.id', 'authors_books.author_id')
+    .innerJoin('books', 'authors_books.book_id', 'books.id')
+    .select('books.title', 'authors.first_name', 'authors.last_name', 'authors.biography', 'authors.portrait_url', 'authors.id','books.id')
+    .then(function(data){
+        var booksArray=[];
+        for (var i = 0; i < data.length; i++) {
+            booksArray.push({title: data[i].title, id: data[i].id})
+        }
+        knex('books')
+        .pluck('title')
+        .then(function (allBooks){
+            res.render('editAuthor',{
+                result: data[0],
+                books: booksArray,
+                allBooks: allBooks
+            });
+        })
+    })
+})
+
 router.get('/:id', function (req, res, next){
     return knex('authors')
         .where('authors.id', req.params.id)
@@ -66,28 +89,6 @@ router.get('/:id', function (req, res, next){
 })
 
 
-router.get('/:id/edit', function (req, res, next){
-    return knex('authors')
-        .where('authors.id', req.params.id)
-        .innerJoin('authors_books', 'authors.id', 'authors_books.author_id')
-        .innerJoin('books', 'authors_books.book_id', 'books.id')
-        .select('books.title', 'authors.first_name', 'authors.last_name', 'authors.biography', 'authors.portrait_url', 'authors.id','books.id')
-        .then(function(data){
-            var booksArray=[];
-            for (var i = 0; i < data.length; i++) {
-                booksArray.push({title: data[i].title, id: data[i].id})
-            }
-            knex('books')
-            .pluck('title')
-            .then(function (allBooks){
-                res.render('editAuthor',{
-                    result: data[0],
-                    books: booksArray,
-                    allBooks: allBooks
-                });
-            })
-        })
-})
 
 
 module.exports = router;
