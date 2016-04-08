@@ -12,25 +12,25 @@
 
     <div class="col-md-10 col-md-offset-1">
         {{#result}}
-        <div class="thumbnail col-md-11">
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="col-md-3">
-                        <img src="{{cover_url}}" alt="coverPicture" style="height:270px">
-                    </div>
-                    <div class="col-md-8 col-md-offset-1">
-                        <div class="caption">
-                            <a href="/books/{{id}}"><h3>{{title}}</h3></a>
-                            <h4>By</h4>
-                            <h4>Genre: {{genre}}</h4>
-                            <p>{{description}}</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Edit</a><a href="#" class="btn btn-default" role="button">Delete</a></p>
+            <div class="thumbnail col-md-11">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="col-md-3">
+                            <img src="{{cover_url}}" alt="coverPicture" style="height:270px">
+                        </div>
+                        <div class="col-md-8 col-md-offset-1">
+                            <div class="caption">
+                                <a href="/books/{{id}}"><h3>{{title}}</h3></a>
+                                <h4>By {{#authors}} {{this}} {{/authors}} </h4>
+                                <h5>Genre: {{genre}}</h5>
+                                <p>{{description}}</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Edit</a><a href="#" class="btn btn-default" role="button">Delete</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         {{/result}}
-    </div>
-    </div>
+     </div>
+ </div>
 </div>

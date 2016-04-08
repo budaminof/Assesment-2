@@ -10,6 +10,7 @@
         </div>
 
         <div class="col-md-10 col-md-offset-1">
+            <h3>{{msg}}</h3>
             {{#result}}
             <div class="thumbnail col-md-11">
                 <div class="row">
@@ -22,6 +23,12 @@
                                 <h3><a href='/authors/{{id}}'>{{first_name}} {{last_name}}</a></h3>
                                 <h4>{{biography}}</h4>
                                 <h4>Book:</h4>
+                                <ul>
+                                    {{#booksTitle}}
+                                        <li>{{this}}</li>
+                                    {{/booksTitle}}
+                                </ul>
+
                                 <p><a href="#" class="btn btn-primary" role="button">Delete</a></p>
                             </div>
                         </div>

@@ -2,25 +2,40 @@ var express = require('express');
 var router = express.Router();
 var knex = require('knex')(require('../knexfile')['development']);
 
+var msg= '';
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    var authorsObj= {};
+    var youGuys= [];
 
     knex('authors')
-    .orderBy('last_name')
-    .then(function (authorsInfo){
-        console.log(authorsInfo);
-        authorsObj.authors = authorsInfo
-        res.render('authors',{result: authorsInfo});
+    .then(function (authors){
+        console.log('kitties');
+        for (var i = 0; i < authors.length; i++) {
+            youGuys.push({
+                id: authors[i].id,
+                first_name: authors[i].first_name,
+                last_name: authors[i].last_name,
+                biography:authors[i].biography,
+                portrait_url: authors[i].portrait_url,
+                booksTitle: []
+            })
+        }
     })
 
-    knex('books')
-    .pluck('id')
-    .then(function(){
-
+    return knex('authors')
+    .innerJoin('authors_books', 'authors.id', 'authors_books.author_id')
+    .innerJoin('books', 'authors_books.book_id', 'books.id')
+    .select('books.title', 'authors_books.author_id')
+    .then(function (data){
+        for (var i = 0; i < youGuys.length; i++) {
+            for (var j = 0; j < data.length; j++) {
+                if(youGuys[i].id == data[j].author_id){
+                    youGuys[i].booksTitle.push(data[j].title)
+                }
+            }
+        }
+        res.render('authors', {result: youGuys, booksTitle: youGuys})
     })
-
-
 });
 
 router.get('/:id', function (req, res, next){
@@ -37,5 +52,6 @@ router.get('/:id', function (req, res, next){
             res.render('author',{books: booksArray, result: data[0]});
         })
 })
+
 
 module.exports = router;

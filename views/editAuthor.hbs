@@ -1,0 +1,47 @@
+<div class="col-md-12">
+
+<div class="row">
+    <div class="col-md-1">
+        <img src="http://whytoread.com/wp-content/uploads/2015/03/best-books-book-youll-ever-read.jpg"
+        alt="authors" style="height:60px">
+        <a href="/books"><h3 class="sidewise">Books</h3></a>
+        <img src="https://s-media-cache-ak0.pinimg.com/736x/d6/ac/26/d6ac2660f86d6936ed3a055481b179f6.jpg"
+          alt="authors" style="height:60px">
+         <a href="/authors"><h3 class="sidewise">Authors</h3></a>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1">
+        <div class="editForm">
+            <form action="/authors/{{data.id}}/edit" method="post">
+                <label>First Name</label>
+                <br>
+                <input type="text" name="first_name" value="{{data.first_name}}">
+                <br>
+                <label>Last Name</label>
+                <br>
+                <input type="text" name="last_name" value="{{data.last_name}}">
+                <br>
+                <label>Portrait URL</label>
+                <br>
+                <input type="text" name="portrait_url" value="data.portrait_url">
+                <br>
+                <label>Biography</label>
+                <br>
+                <input type="text" name="biography" value="{{data.biography}}">
+                <br>
+                <label>Books</label>
+                <div class="books">
+                    {{#books}}
+                        <p>{{this.title}}</p><a href="/books/{{this.title}}/delete">remove</a>
+                    {{/books}}
+                </div>
+                <br>
+                <div class="addBook">
+                    <input type="text" name="title" value=""><a href="/add">Add Book</a>
+                </div>
+                <input type="submit" value="Edit">
+            </form>
+
+        </div>
+    </div>
+</div>
