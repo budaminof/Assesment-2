@@ -111,5 +111,14 @@ router.post('/add', function (req, res, next){
 })
 
 
+router.get('/:id/delete', function(req, res, next){
+        knex('authors')
+        .where({id: req.params.id})
+        .first()
+        .del()
+        .then(function (data){
+            res.redirect('/authors');
+        })
+})
 
 module.exports = router;

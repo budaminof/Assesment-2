@@ -58,7 +58,6 @@ router.get('/:id/edit', function (req, res, next){
         .innerJoin('authors', 'authors_books.author_id', 'authors.id')
         .select('books.id', 'books.title', 'authors.first_name', 'authors.last_name', 'books.description', 'books.cover_url', 'authors.id', 'books.genre')
         .then(function(data){
-            console.log(data);
             var authorsArray=[];
             for (var i = 0; i < data.length; i++) {
                 authorsArray.push({author: data[i].first_name+' '+data[i].last_name, id: data[i].id, bookId: req.params.id})
@@ -121,6 +120,32 @@ router.post('/add', function(req, res, next){
     })
 })
 
+router.post('/:idBook/edit', function (req, res, next){
+    var authorId = req.body.author_id;
+    var authorsIdArray = authorId instanceof Array ? authorId : [authorId];
+
+    knex('books')
+    .where({id: req.params.idBook})
+    .update({
+        title: req.body.title,
+        genre: req.body.genre,
+        description: req.body.description,
+        cover_url: req.body.cover_url
+    })
+    .returning('id')
+    .then(function(id){
+        var authorObj = authorsIdArray.map(function(author_id){
+            return ({book_id: id[0], author_id: author_id})
+        })
+        return knex('authors_books')
+            .insert(authorObj)
+            .then(function (data){
+                res.redirect('/books');
+            })
+    })
+
+})
+
 router.get('/:idAuthor/:idBook/removeAuthor', function (req, res, next){
     knex('authors_books')
     .where({author_id: req.params.idAuthor, book_id: req.params.idBook})
@@ -129,6 +154,16 @@ router.get('/:idAuthor/:idBook/removeAuthor', function (req, res, next){
     .then(function(){
         res.redirect('/books/'+req.params.idBook+'/edit');
     })
+})
+
+router.get('/:id/delete', function(req, res, next){
+        knex('books')
+        .where({id: req.params.id})
+        .first()
+        .del()
+        .then(function (data){
+            res.redirect('/books')
+        })
 })
 
 module.exports = router;

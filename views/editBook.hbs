@@ -33,13 +33,13 @@
                 <div class="form-group">
                 <label>Authors</label>
                 {{#authors}}
-                <p class="form-control">{{author}}<a href="/books/{{id}}/{{bookId}}/removeAuthor">remove</a></p>
+                <p class="form-control">{{author}} <a href="/books/{{id}}/{{bookId}}/removeAuthor">remove</a></p>
                 {{/authors}}
                 </div>
                 <label>Edit Authors:</label>
                 <div class="checkbox">
                 {{#allAuthors}}
-                <label><input type="checkbox" value="{{authors.id}}">{{author}}</input></label><br>
+                <label><input type="checkbox" name="author_id" value="{{id}}">{{author}}</input></label><br>
                 {{/allAuthors}}
                 </div>
                 <div class="form-group">
