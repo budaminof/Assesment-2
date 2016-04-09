@@ -13,7 +13,7 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="editForm">
             <legend>Edit</legend>
-            <form action="/authors/{{result.id}}/edit" method="post">
+            <form action="/authors/{{authorId}}/edit" method="post">
                 <div class="form-group">
                 <label>First Name</label>
                 <input type="text" name="first_name" class="form-control" value="{{result.first_name}}">
@@ -33,13 +33,13 @@
                 <label>Books</label>
                 <div class="form-group">
                 {{#books}}
-                <p class="form-control">{{title}}<a href="/books/{{id}}/delete"> remove</a></p>
+                <p class="form-control">{{title}}<a href="/authors/{{id}}/{{authorID}}/removeBook"> remove</a></p>
                 {{/books}}
                 </div>
                 <label>Add Books:</label>
                 <div class="form-group">
                 {{#allBooks}}
-                <label><input type="checkbox">{{this}}</input></label><br>
+                <label><input type="checkbox" name="book_id" value="{{this.id}}">{{this.title}}</input></label><br>
                 {{/allBooks}}
                 </div>
                 <div class="form-group">
