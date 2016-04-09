@@ -1,28 +1,28 @@
 require('dotenv').load();
 
 module.exports = {
-    debug: true,
+  debug: true,
 
-    development: {
-       client: 'postgresql',
-       connection: process.env.DATABASE_URL,
-           pool: {
-            min:2,
-            max:10
-           }
-       },
+  development: {
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10
+    }
+  },
 
-    production: {
-      client: 'postgresql',
-      connection: process.env.DATABASE_UR,
-          pool: {
-           min:2,
-           max:10
-          }
-      },
+  production: {
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10
+    }
+  },
 
-        seeds: {
-            directory: './seeds/'
-        }
+  seeds: {
+  directory: './seeds/'
+  }
 
 };
