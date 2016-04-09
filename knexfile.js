@@ -14,7 +14,7 @@ module.exports = {
             directory: './seeds/'
         }
 
-    prodution: {
+    production: {
       client: 'postgresql',
       connection: process.env.DATABASE_UR
         },
