@@ -13,27 +13,27 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="editForm">
             <legend>Add a Book</legend>
-            <form action="/authors/" method="post">
+            <form action="/books/add" method="post">
                 <div class="form-group">
-                <label>Add a Book</label>
-                <input type="text" class="form-control" name="title" value="">
+                <label>Title</label>
+                <input type="text" class="form-control" name="title">
                 </div>
                 <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" name="genre" value="">
+                <label>Genre</label>
+                <input type="text" class="form-control" name="genre">
                 </div>
                 <div class="form-group">
-                <label>Portrait URL</label>
-                <input type="text" class="form-control" name="cover_url" value="">
+                <label>Cover URL</label>
+                <input type="text" class="form-control" name="cover_url">
                 </div>
                 <div class="form-group">
-                <label>Biography</label>
-                <textarea name="description" class="form-control" value="" rows='6' cols='30'></textarea>
+                <label>Description</label>
+                <textarea name="description" class="form-control" rows='10'></textarea>
                 </div>
                 <label>Authors</label>
                 <div class="checkbox">
                 {{#authors}}
-                <label><input type="checkbox">{{author}}</input></label><br>
+                <label><input type="checkbox" name="author_id" value={{id}}>{{author}}</input></label><br>
                 {{/authors}}
                 </div>
                 <div class="form-group">

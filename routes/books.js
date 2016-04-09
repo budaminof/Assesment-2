@@ -95,4 +95,29 @@ router.get('/:id', function(req, res, next){
     })
 
 })
+
+router.post('/add', function(req, res, next){
+    var authors = req.body.author_id;
+    var authorsArray = authors instanceof Array ? authors : [authors];
+
+    knex('books')
+    .insert({
+        title: req.body.title,
+        genre: req.body.genre,
+        cover_url: req.body.cover_url,
+        description: req.body.description
+    })
+    .returning('id')
+    .then(function(id){
+        var author_array = authorsArray.map(function(author_id){
+            return ({book_id: id[0], author_id: author_id})
+        })
+        return knex('authors_books')
+            .insert(author_array)
+            .then(function (data){
+                res.redirect('/books');
+            })
+    })
+})
+
 module.exports = router;
