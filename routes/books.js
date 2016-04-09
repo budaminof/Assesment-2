@@ -56,8 +56,9 @@ router.get('/:id/edit', function (req, res, next){
         .where('books.id', req.params.id)
         .innerJoin('authors_books', 'books.id', 'authors_books.book_id')
         .innerJoin('authors', 'authors_books.author_id', 'authors.id')
-        .select('books.id', 'books.title', 'authors.first_name', 'authors.last_name', 'books.description', 'books.cover_url', 'authors.id', 'books.genre')
+        .select('authors.id', 'books.title', 'authors.first_name', 'authors.last_name', 'books.description', 'books.cover_url', 'books.genre')
         .then(function(data){
+            console.log(data);
             var authorsArray=[];
             for (var i = 0; i < data.length; i++) {
                 authorsArray.push({author: data[i].first_name+' '+data[i].last_name, id: data[i].id, bookId: req.params.id})
@@ -71,6 +72,7 @@ router.get('/:id/edit', function (req, res, next){
                         authorsArr.push({author: authors[i].first_name+' '+authors[i].last_name, id: authors[i].id})
                     }
                 res.render('editBook',{
+                    book_id: req.params.id,
                     result: data[0],
                     authors: authorsArray,
                     allAuthors: authorsArr
