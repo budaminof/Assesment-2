@@ -99,8 +99,8 @@ router.post('/add', function (req, res, next){
         biography: req.body.biography
     }).returning('id')
     .then(function (id){
-        var bookIdOjb = bookIdArray.map(function(bookIdArray-i){
-            return ({author_id: id[0], book_id: bookIdArray-i})
+        var bookIdOjb = bookIdArray.map(function(bookIdArrayI){
+            return ({author_id: id[0], book_id: bookIdArrayI})
         })
         return knex('authors_books')
         .insert(bookIdOjb)

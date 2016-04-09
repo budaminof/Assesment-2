@@ -15,6 +15,12 @@ a {
 
 img {
     padding-top: 10px;
+    width:200px;
+}
+
+.imgSide{
+    padding-top: 10px;
+    width: 100px;
 }
 
 .mainImg, .mainImg2{

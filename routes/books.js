@@ -56,11 +56,12 @@ router.get('/:id/edit', function (req, res, next){
         .where('books.id', req.params.id)
         .innerJoin('authors_books', 'books.id', 'authors_books.book_id')
         .innerJoin('authors', 'authors_books.author_id', 'authors.id')
-        .select('books.title', 'authors.first_name', 'authors.last_name', 'books.description', 'books.cover_url', 'authors.id','books.id', 'books.genre')
+        .select('books.id', 'books.title', 'authors.first_name', 'authors.last_name', 'books.description', 'books.cover_url', 'authors.id', 'books.genre')
         .then(function(data){
+            console.log(data);
             var authorsArray=[];
             for (var i = 0; i < data.length; i++) {
-                authorsArray.push({author: data[i].first_name+' '+data[i].last_name, id: data[i].id})
+                authorsArray.push({author: data[i].first_name+' '+data[i].last_name, id: data[i].id, bookId: req.params.id})
             }
 
             knex('authors')
@@ -117,6 +118,16 @@ router.post('/add', function(req, res, next){
             .then(function (data){
                 res.redirect('/books');
             })
+    })
+})
+
+router.get('/:idAuthor/:idBook/removeAuthor', function (req, res, next){
+    knex('authors_books')
+    .where({author_id: req.params.idAuthor, book_id: req.params.idBook})
+    .first()
+    .del()
+    .then(function(){
+        res.redirect('/books/'+req.params.idBook+'/edit');
     })
 })
 
