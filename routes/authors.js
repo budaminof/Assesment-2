@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
 
     knex('authors')
     .then(function (authors){
-        console.log('kitties');
         for (var i = 0; i < authors.length; i++) {
             youGuys.push({
                 id: authors[i].id,
@@ -88,6 +87,28 @@ router.get('/:id', function (req, res, next){
         })
 })
 
+router.post('/add', function (req, res, next){
+    var bookId = req.body.book_id;
+    var bookIdArray = bookId instanceof Array ? bookId : [bookId];
+
+    knex('authors')
+    .insert({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        portrait_url: req.body.portrait_url,
+        biography: req.body.biography
+    }).returning('id')
+    .then(function (id){
+        var bookIdOjb = bookIdArray.map(function(bookId){
+            return ({author_id: id[0], book_id: bookId})
+        })
+        return knex('authors_books')
+        .insert(bookIdOjb)
+        .then(function (data){
+            res.redirect('/authors');
+        })
+    })
+})
 
 
 
